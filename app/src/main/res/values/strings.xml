@@ -4,5 +4,7 @@
     <string name="app_name">Delivery Riders</string>
     <string name="title_activity_maps">Map</string>
     <string name="message_to_warehouse">MESSAGE TO WAREHOUSE</string>
+    <string name="popup_menu_title">POPUP MENU</string>
+    <string name="debug_gps_info">GPS INFO</string>
 
 </resources>
