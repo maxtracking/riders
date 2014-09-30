@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+
+android {
+    readVersionProps()
+    project.archivesBaseName = "Riders-" + formatVersionName(true);
+
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    defaultConfig {
+        applicationId "me.alexeygusev.riders"
+        minSdkVersion 16
+        targetSdkVersion 20
+        versionCode = Integer.parseInt(versionProps.version_code)
+        versionName = formatVersionName(false)
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file("keystore/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+        release {
+            storeFile file("keystore/riders.jks")
+            storePassword "SenderS0lutions"
+            keyAlias "sendersolutions"
+            keyPassword "SenderS0lutions"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.google.android.gms:play-services:5.2.08'
+    compile 'com.google.maps.android:android-maps-utils:0.3+'
+    compile 'uk.co.chrisjenx:calligraphy:1.1.+'
+}
+
+def readVersionProps(){
+    Properties versionProps = new Properties()
+    versionProps.load(new FileInputStream("$projectDir/version.properties"))
+    ext.versionProps = versionProps
+}
+
+def writeVersionProps(){
+    def comment = "This file uses Semantic Versioning. Please refer to http://semver.org/ \n#for the meaning of the version numbers. version_code is the Manifest version code"
+
+    versionProps.store(new FileOutputStream("$projectDir/version.properties"), comment)
+}
+
+def formatVersionName(boolean withMetadata){
+    def verStr = String.format("%s.%s.%s", versionProps.major, versionProps.minor, versionProps.patch)
+
+    if(withMetadata) verStr += "+" + versionProps.metadata
+
+    return verStr
+}
+
+task incrementMetadata() {
+    description = "Increments the `metadata' version property in version.properties"
+    group = "SenderSolutions"
+
+    doLast {
+        logger.info("Current version is: " + formatVersionName(true))
+        versionProps.metadata = Integer.toString(Integer.parseInt(versionProps.metadata) + 1)
+        logger.info("New version is: " + formatVersionName(true))
+        writeVersionProps()
+    }
+}

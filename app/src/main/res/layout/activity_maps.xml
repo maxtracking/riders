@@ -1,0 +1,61 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context=".MapsActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+    <Button
+        android:id="@+id/btnToggleMessages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="7dp"
+        android:background="@drawable/empty_selector"
+        android:text="@string/message_to_warehouse"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        style="?android:textAppearanceLarge"/>
+
+    <RelativeLayout
+        android:id="@+id/rlPopupMenuPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/popup_background"
+        android:layout_above="@+id/btnToggleMessages">
+        <TextView
+            android:id="@+id/tvMenuTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/banner2"
+            android:gravity="center"
+            android:text="POPUP MENU"
+            android:textColor="@android:color/holo_purple"
+            android:textStyle="bold"
+            style="?android:textAppearanceLarge"/>
+        <ListView
+            android:id="@+id/lvOptions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tvMenuTitle"/>
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvGPSInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
+        android:layout_above="@+id/btnToggleMessages"
+        android:gravity="top|right"
+        android:text="GPS INFO"
+        android:textColor="@android:color/black"
+        style="?android:textAppearanceMedium"/>
+
+</RelativeLayout>
