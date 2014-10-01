@@ -43,7 +43,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.google.android.gms:play-services:5.2.08'
+//    compile 'com.google.android.gms:play-services:5.2.08'
+    compile 'com.google.android.gms:play-services:5.0.89'
     compile 'com.google.maps.android:android-maps-utils:0.3+'
     compile 'uk.co.chrisjenx:calligraphy:1.1.+'
 }
